@@ -19,13 +19,9 @@ public class TicketGenerateCanceledConsumer : IConsumer<ICancelGenerateTicketEve
     public async Task Consume(ConsumeContext<ICancelGenerateTicketEvent> context)
     {
         var data = context.Message;
-        if (data is not null)
-        {
-            var res = await _ticketService.DeleteTicket(data.TicketId.ToString());
-            _logger.LogInformation(res ? $"Ticket {data.TicketId} removed" : $"Ticket {data.TicketId} removed failed");
-        }
+        var res = await _ticketService.DeleteTicket(data.TicketId.ToString());
+        _logger.LogInformation(res ? $"Ticket {data.TicketId} removed" : $"Ticket {data.TicketId} removed failed");
 
-        await Task.CompletedTask;
     }
 }
 

@@ -22,15 +22,15 @@ builder.Services.AddMassTransit(config =>
             hostCfg.Username(RabbitMqConfigs.UserName);
             hostCfg.Password(RabbitMqConfigs.Password);
         });
-
-        //cfg.ConfigureEndpoints(context);
-
+        
         cfg.ReceiveEndpoint(RabbitMqQueues.SagaQueue, ep =>
         {
             ep.PrefetchCount = 10;
             ep.ConfigureConsumer<SendEmailConsumer>(context);
             ep.ConfigureConsumer<CancelSendEmailConsumer>(context);
         });
+
+        cfg.ConfigureEndpoints(context);
     });
 });
 

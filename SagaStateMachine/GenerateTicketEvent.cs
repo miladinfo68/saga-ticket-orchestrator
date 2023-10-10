@@ -6,6 +6,7 @@ public class GenerateTicketEvent : IGenerateTicketEvent
 {
     private readonly TicketStateData _ticketStateData;
 
+    //resposibility is passing message context to event IGenerateTicketEvent
     public GenerateTicketEvent(TicketStateData ticketStateData)
     {
         _ticketStateData = ticketStateData;

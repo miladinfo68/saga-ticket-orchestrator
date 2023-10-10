@@ -21,7 +21,6 @@ public class CancelSendEmailConsumer : IConsumer<ICancelSendEmailEvent>
     public async Task Consume(ConsumeContext<ICancelSendEmailEvent> context)
     {
         var data = context.Message;
-        if (data == null) await Task.CompletedTask;
         var res = await _ticketInfoService.RemoveTicketInfo(data.TicketId.ToString());
         await context.Publish<ICancelGenerateTicketEvent>(new
         {

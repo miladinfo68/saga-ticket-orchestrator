@@ -29,7 +29,7 @@ public class TicketStateMachine : MassTransitStateMachine<TicketStateData>
         Event(() => SendEmailEvent, e => e.CorrelateById(m => m.Message.TicketId));
         Event(() => CancelSendEmailEvent, e => e.CorrelateById(m => m.Message.TicketId));
 
-        //a message came from ticket service and initialized state by that
+        //a message comming from ticket service and initialized state by that
         Initially(
   When(AddTicketEvent)
                 .Then(ctx =>

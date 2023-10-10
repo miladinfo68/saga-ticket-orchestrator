@@ -16,7 +16,6 @@ public class SendEmailConsumer : IConsumer<ISendEmailEvent>
     public async Task Consume(ConsumeContext<ISendEmailEvent> context)
     {
         var data = context.Message;
-        if (data == null) await Task.CompletedTask;
         if (data.Location == "London")
         {
             await context.Publish<ICancelSendEmailEvent>(new

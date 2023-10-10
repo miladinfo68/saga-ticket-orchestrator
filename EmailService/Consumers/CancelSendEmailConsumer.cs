@@ -12,8 +12,20 @@ public class CancelSendEmailConsumer : IConsumer<ICancelSendEmailEvent>
     {
         _logger = logger;
     }
-    public Task Consume(ConsumeContext<ICancelSendEmailEvent> context)
+    public async Task Consume(ConsumeContext<ICancelSendEmailEvent> context)
     {
-        throw new NotImplementedException();
+        var data = context.Message;
+
+        await context.Publish<ICancelSendEmailEvent>(new
+        {
+            TicketId = data.TicketId,
+            Title = data.Title,
+            Email = data.Email,
+            RequireDateTime = data.RequireDate,
+            Age = data.Age,
+            Loaction = data.Location,
+        });
+        _logger.LogInformation($"location is unavailable");
+ 
     }
 }

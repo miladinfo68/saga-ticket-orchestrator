@@ -14,9 +14,6 @@ public class GetAddedTicketConsumer:IConsumer<IGetAddedTicketEvent>
     public async Task Consume(ConsumeContext<IGetAddedTicketEvent> context)
     {
         var data = context.Message;
-        if(data is null) await Task.CompletedTask;
-
-
         await context.Publish<IAddTicketEvent>(new
         {
             TicketId = data.TicketId,
